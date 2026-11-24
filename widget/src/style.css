@@ -1,0 +1,10 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@layer base {
+  :root { font-family: 'DM Sans', sans-serif; color: #222b2a; background: #f5f7f5; font-synthesis: none; }
+  body { min-width: 320px; }
+  button { cursor: pointer; }
+  button:disabled { cursor: wait; }
+  button:focus-visible, textarea:focus-visible { outline: 3px solid #80b8a4; outline-offset: 2px; }
+}
