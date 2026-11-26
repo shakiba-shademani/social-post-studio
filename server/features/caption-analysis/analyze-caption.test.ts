@@ -1,6 +1,7 @@
 import { strict as assert } from 'node:assert';
 import { test } from 'node:test';
 import { analyzeCaption } from './analyze-caption.ts';
+import { normalizeCaptionLinks } from './links.ts';
 
 test('counts visible characters and Persian hashtags without URL fragments', () => {
   const result = analyzeCaption('☕️ #کافه_گردی #قهوه #قهوه https://example.com/page#fragment', 1);
@@ -24,4 +25,19 @@ test('empty captions do not receive Instagram tips', () => {
   const result = analyzeCaption(' ', 1);
   assert.equal(result.words, 0);
   assert.deepEqual(result.tips, []);
+});
+
+test('normalizes Markdown links for copying and counts a linked URL once', () => {
+  const text = '[https://example.com](https://example.com) and [Menu](https://cafe.example/menu#today) #coffee';
+  assert.equal(normalizeCaptionLinks(text), 'https://example.com and Menu https://cafe.example/menu#today #coffee');
+  const result = analyzeCaption(text, 1);
+  assert.equal(result.links.total, 2);
+  assert.deepEqual(result.links.domains, ['example.com', 'cafe.example']);
+  assert.deepEqual(result.hashtags.unique, ['#coffee']);
+});
+
+test('accepts uppercase URL schemes and trailing punctuation', () => {
+  const result = analyzeCaption('(HTTPS://EXAMPLE.COM/page), WWW.Example.org!', 2);
+  assert.equal(result.links.total, 2);
+  assert.deepEqual(result.links.domains, ['example.com', 'www.example.org']);
 });
