@@ -4,6 +4,22 @@ Social Post Studio is a TypeScript full-stack portfolio project for creating and
 
 The repository also contains an earlier standalone draft workspace with an Express API and PostgreSQL. It is a separate local experience and is not currently deployed with the ChatGPT MCP service.
 
+## Demo
+
+The images below are visually edited from screenshots of the ChatGPT app to make the interface easier to see.
+
+**Write and edit a caption**
+
+![Caption editor showing an Instagram birthday caption](docs/screenshots/write-caption.png)
+
+**Preview the post for a selected platform**
+
+![Caption preview with social platform selection](docs/screenshots/preview.png)
+
+**Review caption insights and copy**
+
+![Caption insights showing character, hashtag and link counts](docs/screenshots/caption-insights.png)
+
 ## What it does
 
 - Works with Instagram, LinkedIn, X, and Facebook.
