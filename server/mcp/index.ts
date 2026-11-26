@@ -8,7 +8,8 @@ import { z } from 'zod';
 import { SocialPlatform } from '../features/platforms/social-platform.ts';
 import { analyzeCaption } from '../features/caption-analysis/analyze-caption.ts';
 
-const port = Number(process.env.MCP_PORT ?? 3001);
+const port = Number(process.env.PORT ?? process.env.MCP_PORT ?? 3001);
+const host = process.env.PORT ? '0.0.0.0' : '127.0.0.1';
 const widgetUri = 'ui://social-post-studio/caption-v6.html';
 const widgetPath = fileURLToPath(new URL('../../widget/dist-chatgpt/chatgpt.html', import.meta.url));
 
@@ -111,9 +112,9 @@ const httpServer = createServer(async (request, response) => {
   }
 });
 
-httpServer.listen(port, '127.0.0.1', () => {
+httpServer.listen(port, host, () => {
   const address = httpServer.address();
   if (address && typeof address === 'object') {
-    console.log(`MCP server listening at http://127.0.0.1:${address.port}/mcp`);
+    console.log(`MCP server listening at http://${host}:${address.port}/mcp`);
   }
 });

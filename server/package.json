@@ -9,6 +9,7 @@
   "scripts": {
     "start": "node --env-file=../.env index.ts",
     "mcp": "node --env-file=../.env mcp/index.ts",
+    "mcp:production": "node mcp/index.ts",
     "migrate": "node --env-file=../.env database/migrate.ts",
     "typecheck": "tsc --noEmit"
   },
